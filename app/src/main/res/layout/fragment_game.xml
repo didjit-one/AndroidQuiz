@@ -10,7 +10,6 @@
             name="game"
             type="com.androidquiz.GameFragment" />
 
-
     </data>
 
 
