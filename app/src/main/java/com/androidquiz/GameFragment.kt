@@ -55,7 +55,8 @@ private var questionIndex=0
         randomizeQuestions()
         binding.game=this
 
-        binding.submitButton.setOnClickListener { view:View->
+        binding.submitButton.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
+        { view:View->
             val chekedId=binding.questionRadioGroup.checkedRadioButtonId
             if (-1 !=chekedId){
                 var answerIndex=0
