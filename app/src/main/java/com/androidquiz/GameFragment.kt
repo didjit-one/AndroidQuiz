@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.androidquiz.databinding.FragmentGameBinding
 
 
@@ -143,8 +144,78 @@ class GameFragment : Fragment() {
         Question(
             text = "ConstraintLayout is more efficient than nested LinearLayouts for more complex UIs",
             answers = listOf("True", "False", "Maybe", "Seldom")
+        ),
+        /////////////////////////////////
+        Question(
+            text = "In which method is the Acivity visible?",
+            answers = listOf("onResume", "onCreate", "onStart", "None of the Above")
+        ),
+
+        Question(
+            text = "Which method is called first after an orientation change?",
+            answers = listOf("onPause", "onStop", "onResume", "None of the Above")
+        ),
+
+        Question(
+            text = "ConstraintLayout is more efficient than nested LinearLayouts for more complex UIs",
+            answers = listOf("True", "False", "Maybe", "Seldom")
+        ),
+
+        ///////////////////////////////////////////
+
+        Question(
+            text = "Activities and Fragments share a lifecycle.",
+            answers = listOf("False", "True", "Maybe", "Seldom")
+        ),
+
+        Question(
+            text = "Each lifecycle method has a corresponding paired method for open and close.",
+            answers = listOf("True", "False", "Maybe", "Seldom")
+        ),
+
+        Question(
+            text = "Fragments are destroyed when they are no longer visible?",
+            answers = listOf("True", "False", "Maybe", "Seldom")
+        ),
+
+        Question(
+            text = "Which Fragment lifecycle method are its Views visible?",
+            answers = listOf("onResume", "onCreateView", "onViewCreated", "onStart")
+        ),
+
+
+        Question(
+            text = "ViewModels should be aware of the UI layer.",
+            answers = listOf("False", "True", "Maybe", "Seldom")
+        ),
+
+        Question(
+            text = "Proper MVVM architecture dictates a unidirectional data flow.",
+            answers = listOf("True", "False", "Maybe", "Seldom")
+        ),
+
+        Question(
+            text = "Methods that update TextViews should exist in which layer?",
+            answers = listOf("View", "ViewModel", "Model", "None of the Above")
+        ),
+
+        Question(
+            text = "Fields that store references to Views should be stored in which layer?",
+            answers = listOf("View", "ViewModel", "Model", "None of the Above")
+        ),
+
+        Question(
+            text = "Fields that store data required for business logic should be stored in which layer?",
+            answers = listOf("ViewModel", "View", "Model", "None of the Above")
+        ),
+
+        Question(
+            text = "Fields that represent data for objects should be stored in which layer?",
+            answers = listOf("View", "ViewModel", "Model", "None of the Above")
         )
     )
+    ////////////////////////////////////
+
 
     lateinit var currentQuestion: Question
     lateinit var answers: MutableList<String>
@@ -187,18 +258,16 @@ class GameFragment : Fragment() {
 
                     } else {
                         //WE WON
-
+                        view.findNavController().navigate(
+                            R.id.action_gameFragment_to_gameWonFragment
+                        )
                     }
 
-
                 } else {
-                    //GameOver
+                    view.findNavController().navigate(R.id.action_gameFragment_to_gameOverFragment2)
 
                 }
-
-
             }
-
         }
 
 
@@ -213,8 +282,6 @@ class GameFragment : Fragment() {
         questions.shuffle()
         questionIndex = 0
         setQuestions()
-
-
     }
 
     private fun setQuestions() {
@@ -223,7 +290,7 @@ class GameFragment : Fragment() {
         answers = currentQuestion.answers.toMutableList()
         answers.shuffle()
         (activity as AppCompatActivity).supportActionBar?.title =
-            "Android Trivia ({questionIndex+1}/{numQuestions})"
+            "Android Trivia (${questionIndex+1}/${numQuestions})"
 
 
     }
